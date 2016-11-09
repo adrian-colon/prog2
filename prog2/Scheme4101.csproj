@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{48CDC016-72D7-41D4-99DA-838AFA84B109}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>Scheme4101</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Scheme4101</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SPP, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\SPP.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scheme\PseudoCode.txt" />
+    <Content Include="Scheme\SampleExecution.txt" />
+    <Content Include="SPP.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Csharp\Makefile" />
+    <None Include="Scheme\printenv.scm" />
+    <None Include="Scheme\printenv.scm.pdf" />
+    <None Include="Scheme\scheme.scm" />
+    <None Include="Scheme\scheme.scm.pdf" />
+    <None Include="Scheme\top-level.scm" />
+    <None Include="Scheme\top-level.scm.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Csharp\Scheme4101.cs" />
+    <Compile Include="Csharp\Special\Begin.cs" />
+    <Compile Include="Csharp\Special\Cond.cs" />
+    <Compile Include="Csharp\Special\Define.cs" />
+    <Compile Include="Csharp\Special\If.cs" />
+    <Compile Include="Csharp\Special\Lambda.cs" />
+    <Compile Include="Csharp\Special\Let.cs" />
+    <Compile Include="Csharp\Special\Quote.cs" />
+    <Compile Include="Csharp\Special\Regular.cs" />
+    <Compile Include="Csharp\Special\Set.cs" />
+    <Compile Include="Csharp\Special\Special.cs" />
+    <Compile Include="Csharp\Tree\BoolLit.cs" />
+    <Compile Include="Csharp\Tree\BuiltIn.cs" />
+    <Compile Include="Csharp\Tree\Closure.cs" />
+    <Compile Include="Csharp\Tree\Cons.cs" />
+    <Compile Include="Csharp\Tree\Environment.cs" />
+    <Compile Include="Csharp\Tree\Ident.cs" />
+    <Compile Include="Csharp\Tree\IntLit.cs" />
+    <Compile Include="Csharp\Tree\Nil.cs" />
+    <Compile Include="Csharp\Tree\Node.cs" />
+    <Compile Include="Csharp\Tree\StringLit.cs" />
+    <Compile Include="Csharp\Tree\TreeBuilder.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
