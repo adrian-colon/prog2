@@ -8,6 +8,7 @@ using Environment = Tree.Environment;
 
 public class Scheme4101
 {
+    public static Environment env = null;
     public static int Main(string[] args)
     {
         // Create scanner that reads from standard input
@@ -52,14 +53,67 @@ public class Scheme4101
 
         // TODO: Create and populate the built-in environment and
         // create the top-level environment
-
+        env = new Environment();
+        Ident id = new Ident("symbol?");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("symbol?");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("number?");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("b+");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("b-");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("b*");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("b/");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("b=");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("b<");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("car");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("cdr");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("cons");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("set-car!");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("set-cdr!");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("null?");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("pair?");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("eq?");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("procedure?");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("read");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("write");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("display");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("newline");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("eval");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("apply");
+        env.define(id, new BuiltIn(id));
+        id = new Ident("interaction-environment");
+        env.define(id, new BuiltIn(id));
+        env = new Environment(env);
         // Read-eval-print loop
 
         // TODO: print prompt and evaluate the expression
+
         root = (Node) parser.parseExp();
         while (root != null) 
         {
-            root.print(0);
+            root.eval(env).print(0);
+            Console.Write("> ");
             root = (Node) parser.parseExp();
         }
 
