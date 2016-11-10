@@ -25,9 +25,9 @@ namespace Tree
 
         public Node getSymbol()		{ return symbol; }
 
-        // TODO: The method isProcedure() should be defined in
+        // DONE :: The method isProcedure() should be defined in
         // class Node to return false.
-        public /* override */ bool isProcedure()	{ return true; }
+        public override bool isProcedure()	{ return true; }
 
         public override void print(int n)
         {
@@ -42,10 +42,12 @@ namespace Tree
                 Console.WriteLine();
         }
 
-        // TODO: The method apply() should be defined in class Node
+        // DONE :: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
-        public /* override */ Node apply (Node args)
+
+        //TODO :: Implement apply, see top
+        public override Node apply (Node args)
         {
             return new StringLit("Error: BuiltIn.apply not yet implemented");
     	}

@@ -24,12 +24,11 @@ namespace Tree
         public Node getFun()		{ return fun; }
         public Environment getEnv()	{ return env; }
 
-        // TODO: The method isProcedure() should be defined in
+        // DONE :: The method isProcedure() should be defined in
         // class Node to return false.
-        public /* override */ bool isProcedure()	{ return true; }
+        public override bool isProcedure()	{ return true; }
 
         public override void print(int n) {
-            // there got to be a more efficient way to print n spaces
             for (int i = 0; i < n; i++)
                 Console.Write(' ');
             Console.WriteLine("#{Procedure");
@@ -40,11 +39,15 @@ namespace Tree
             Console.WriteLine('}');
         }
 
-        // TODO: The method apply() should be defined in class Node
+        // DONE :: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
-        public /* override */ Node apply (Node args)
+        public override Node apply (Node args)
         {
+            Node car = fun.getCdr().getCar();
+            Node cdr = fun.getCdr().getCdr();
+            Environment env = new Environment(this.env);
+            
             return new StringLit("Error: Closure.apply not yet implemented");
         }
     }    
