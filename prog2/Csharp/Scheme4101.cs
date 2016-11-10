@@ -51,7 +51,7 @@ public class Scheme4101
         Parser parser = new Parser(scanner, builder);
         Node root;
 
-        // TODO: Create and populate the built-in environment and
+        // DONE :: Create and populate the built-in environment and
         // create the top-level environment
         env = new Environment();
         Ident id = new Ident("symbol?");
@@ -107,7 +107,7 @@ public class Scheme4101
         env = new Environment(env);
         // Read-eval-print loop
 
-        // TODO: print prompt and evaluate the expression
+        // DONE:: print prompt and evaluate the expression
 
         root = (Node) parser.parseExp();
         while (root != null) 

@@ -40,7 +40,7 @@ namespace Tree
         // Instead of Nil(), we use null to terminate the list.
 
         private Node frame;     	// the innermost scope, an assoc list
-	private Environment env;	// the enclosing environment
+	    private Environment env;	// the enclosing environment
    
         public Environment()
         {
@@ -49,7 +49,7 @@ namespace Tree
         }
    
         public Environment(Environment e)
-	{
+	    {
             frame = Nil.getInstance();
             env = e;
         }
@@ -72,7 +72,7 @@ namespace Tree
         // translation of the Scheme assq function.
         private static Node find(Node id, Node alist)
         {
-            if (! alist.isPair())
+            if (!alist.isPair())
                 return null;	// in Scheme we'd return #f
             else
             {
@@ -99,19 +99,33 @@ namespace Tree
                 return env.lookup(id);
             else
                 // get the value out of the list we got from find()
-		return val.getCar();
+		        return val.getCar();
         }
 
-
+        // from prof email: The method define() is for Define.eval().  
+        // It only adds a new definition to the current frame, without following the chain of Environment objects.
         public void define(Node id, Node val)
         {
-            // TODO: implement this function
+            // DONE :: implement this function
+            frame = new Cons(new Cons(id, new Cons(val, Nil.getInstance())), frame);
         }
 
-
+        // from prof email: The method assign() is for implementing Set.eval().  
+        // It modifies the value of an existing variable.  
+        // The recursive structure is the same as for lookup(), except that after calling find(), 
+        // the value should be updated instead of returned
         public void assign(Node id, Node val)
         {
-            // TODO: implement this function
+            // DONE :: implement this function
+            Node value = find(id, frame);
+            if (value == null && env == null)
+            {
+                Console.Error.WriteLine("undefined variable " + id.getName());
+            }
+            else if (value == null)
+                env.assign(id, val);
+            else
+                value.setCar(val);
         }
     }
 }
