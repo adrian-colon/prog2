@@ -90,5 +90,11 @@ namespace Tree
         {
             return "";
         }
+
+        public virtual int getValue()
+        {
+            Console.Error.WriteLine("Error: not an int");
+            return -1;
+        }
     }
 }

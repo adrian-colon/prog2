@@ -22,5 +22,10 @@ namespace Tree
         {
             return true;
         }
+
+        public override int getValue()
+        {
+            return intVal;
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace Tree
 {
     public class StringLit : Node
     {
+        public static bool printQuotes = true;
         private string stringVal;
 
         public StringLit(string s)
@@ -15,7 +16,16 @@ namespace Tree
 
         public override void print(int n)
         {
-            Printer.printStringLit(n, stringVal);
+            if (printQuotes)
+                Printer.printStringLit(n, stringVal);
+            else
+            {
+                for (int index = 0; index < n; ++index)
+                    Console.Write(' ');
+                Console.Write(stringVal);
+                if (n >= 0)
+                    Console.WriteLine();
+            }
         }
 
         public override bool isString()
