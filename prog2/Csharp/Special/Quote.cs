@@ -12,6 +12,11 @@ namespace Tree
         {
             Printer.printQuote(t, n, p);
         }
+        public override Node eval(Node exp, Environment env)
+        {
+            //Could add error checks
+            return exp.getCdr().getCar();
+        }
     }
 }
 
