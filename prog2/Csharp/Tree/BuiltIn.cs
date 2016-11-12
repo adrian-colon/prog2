@@ -54,7 +54,20 @@ namespace Tree
         public override Node apply(Node args)
         {
             string name = symbol.getName();
-            int numArgs = evaluateArgs(args);
+            int numArgs = 0;
+            Node arg1;
+            Node arg2;
+
+            while (!args.isNull())
+            {
+                numArgs++;
+                if (numArgs == 1)
+                    arg1 = args.getCar();
+                if (numArgs == 2)
+                    arg2 = args.getCar();
+                args = args.getCdr();
+            }
+
             if (numArgs == 0)
             {
                 if (name.Equals("read"))
@@ -77,7 +90,6 @@ namespace Tree
             }
             else if (numArgs == 1)
             {
-                Node arg1 = args.getCar();
                 if (name.Equals("symbol?"))
                     return BoolLit.getInstance(arg1.isSymbol());
                 if (name.Equals("number?"))
@@ -109,8 +121,6 @@ namespace Tree
             }
             else if (numArgs == 2)
             {
-                Node arg1 = args.getCar();
-                Node arg2 = args.getCdr().getCar();
                 if (name.Equals("eq?"))
                 {
                     if (arg1.isSymbol() && arg2.isSymbol())
@@ -169,14 +179,6 @@ namespace Tree
                 return Nil.getInstance();
             }
     	}
-
-        public int evaluateArgs(Node args)
-        {
-            if (args.isNull())
-                return 0;
-            //check for pair?
-            return evaluateArgs(args.getCdr()) + 1;
-        }
     }    
 }
 

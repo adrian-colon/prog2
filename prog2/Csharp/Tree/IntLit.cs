@@ -27,5 +27,10 @@ namespace Tree
         {
             return intVal;
         }
+
+        public override Node eval(Environment env)
+        {
+            return this;
+        }
     }
 }
