@@ -92,7 +92,7 @@ namespace Tree
             if (val == null && env == null)
             {
                 Console.Error.WriteLine("undefined variable " + id.getName());
-                return null;
+                return Nil.getInstance();
             }
             else if (val == null)
                 // look up the identifier in the enclosing scope

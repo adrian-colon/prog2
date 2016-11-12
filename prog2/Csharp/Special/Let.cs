@@ -80,8 +80,8 @@ namespace Tree
                 Node bcdr = body.getCdr();
                 while (!bcdr.isNull())
                 {
-                    bcar = body.getCar().eval(env);
-                    bcdr = body.getCdr();
+                    bcar = bcdr.getCar().eval(env);
+                    bcdr = bcdr.getCdr();
                 }
                 return bcar;
             }

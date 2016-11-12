@@ -57,15 +57,11 @@ namespace Tree
             int numArgs = 0;
             Node arg1;
             Node arg2;
-
-            while (!args.isNull())
+            Node tempArgs = args;
+            while (!tempArgs.isNull())
             {
                 numArgs++;
-                if (numArgs == 1)
-                    arg1 = args.getCar();
-                if (numArgs == 2)
-                    arg2 = args.getCar();
-                args = args.getCdr();
+                tempArgs = tempArgs.getCdr();
             }
 
             if (numArgs == 0)
@@ -81,7 +77,7 @@ namespace Tree
                 else if (name.Equals("newline"))
                 {
                     Console.WriteLine();
-                    return new StringLit("unspecified value");
+                    return new StringLit("#{Unspecific}");
                 }
                 else if (name.Equals("interaction-environment"))
                     return Scheme4101.env;
@@ -90,6 +86,7 @@ namespace Tree
             }
             else if (numArgs == 1)
             {
+                arg1 = args.getCar();
                 if (name.Equals("symbol?"))
                     return BoolLit.getInstance(arg1.isSymbol());
                 if (name.Equals("number?"))
@@ -107,20 +104,22 @@ namespace Tree
                 if (name.Equals("write"))
                 {
                     arg1.print(0); // 0 prints new line after. -1?
-                    return new StringLit("unspecified value");
+                    return new StringLit("#{Unspecific}");
                 }
                 if (name.Equals("display"))
                 {
                     StringLit.printQuotes = false;
                     arg1.print(0); // -1?
                     StringLit.printQuotes = true;
-                    return new StringLit("unspecified value");
+                    return new StringLit("#{Unspecific}");
                 }
                 Console.Error.WriteLine("Error: invalid input");
                 return Nil.getInstance();
             }
             else if (numArgs == 2)
             {
+                arg1 = args.getCar();
+                arg2 = args.getCdr().getCar();
                 if (name.Equals("eq?"))
                 {
                     if (arg1.isSymbol() && arg2.isSymbol())
@@ -132,12 +131,12 @@ namespace Tree
                 if (name.Equals("set-car!"))
                 {
                     arg1.setCar(arg2);
-                    return new StringLit("unspecified value");
+                    return new StringLit("#{Unspecific}");
                 }
                 if (name.Equals("set-cdr!"))
                 {
                     arg1.setCdr(arg2);
-                    return new StringLit("unspecified value");
+                    return new StringLit("#{Unspecific}");
                 }
                 if (name.Equals("eval"))
                     //ret arg1?

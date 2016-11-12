@@ -70,14 +70,14 @@ namespace Tree
                     Console.Error.WriteLine("Error: invalid input");
                 }
             }
-            Node node = cdr.getCar().eval(env);
-            Node cddr = cdr.getCdr();
-            while (!cddr.isNull())
+            Node acar = cdr.getCar().eval(env);
+            Node acdr = cdr.getCdr();
+            while (!acdr.isNull())
             {
-                node = cdr.getCar().eval(env);
-                cddr = cdr.getCdr();
+                acar = acdr.getCar().eval(env);
+                acdr = acdr.getCdr();
             }
-            return node;
+            return acar;
         }
     }    
 }

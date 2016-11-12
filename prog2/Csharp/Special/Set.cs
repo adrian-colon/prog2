@@ -25,13 +25,13 @@ namespace Tree
 
             if (numArgs != 2)
             {
-                Console.Error.WriteLine("Error: invalid expression);
+                Console.Error.WriteLine("Error: invalid expression");
                 return Nil.getInstance();
             }
             Node arg1 = exp.getCdr().getCar();
             Node arg2 = exp.getCdr().getCdr().getCar();
             env.assign(arg1, arg2.eval(env));
-            return new StringLit("unspecified value");
+            return new StringLit("#{Unspecific}");
         }
 }
 }

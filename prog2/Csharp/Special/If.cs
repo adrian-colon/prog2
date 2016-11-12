@@ -37,7 +37,7 @@ namespace Tree
                 if (numArgs == 3)
                     els = exp.getCdr().getCdr().getCdr().getCar();
                 else
-                    els = new StringLit("unspecified value");
+                    els = new StringLit("#{Unspecific}");
             }
             if (cnd.eval(env) != BoolLit.getInstance(false))
                 return thn.eval(env);

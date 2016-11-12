@@ -12,6 +12,11 @@ namespace Tree
         { 
             Printer.printCond(t, n, p);
         }
+
+        public override Node eval(Node exp, Environment env)
+        {
+            return new StringLit("Not yet implemented");
+        }
     }
 }
 
