@@ -12,6 +12,82 @@ namespace Tree
         {
             Printer.printLet(t, n, p);
         }
+
+        private static int define(Node bindings, Environment env, Environment letEnv)
+        {
+            //no bindings left, exit with 0
+            if (bindings.isNull())
+                return 0;
+            Node bind = bindings.getCar();
+            int numArgs = 1;
+            Node expCdr = bind.getCdr();
+            while (!expCdr.isNull())
+            {
+                numArgs++;
+                expCdr = expCdr.getCdr();
+            }
+            //binding has wrong num args, exit with -1
+            if (numArgs != 2)
+                return -1;
+            Node var = bind.getCar();
+            Node val = bind.getCdr().getCar().eval(env);
+            letEnv.define(var, val);
+            return Let.define(bindings.getCdr(), env, letEnv);
+        }
+
+        public override Node eval(Node exp, Environment env)
+        {
+            int numArgs = 0;
+            Node expCdr = exp.getCdr();
+            while (!expCdr.isNull())
+            {
+                numArgs++;
+                expCdr = expCdr.getCdr();
+            }
+
+            if(numArgs < 2)
+            {
+                Console.Error.WriteLine("Error: invalid expression");
+                return Nil.getInstance();
+            }
+            Node bindings = exp.getCdr().getCar(); //bindings car
+            Node body = exp.getCdr().getCdr(); //body cdr
+            Node cdr = exp.getCdr().getCar();
+            Node car;
+            int numBindings = 0;
+            while (!cdr.isNull())
+            {
+                car = cdr.getCar();
+                //bindings have proper format
+                if (!car.isPair())
+                {
+                    Console.Error.WriteLine("Error: invalid expression");
+                    return Nil.getInstance();
+                }
+                numBindings++;
+                cdr = cdr.getCdr();
+            }
+            //at least one binding
+            if (numBindings == 0)
+            {
+                Console.Error.WriteLine("Error: invalid expression");
+                return Nil.getInstance();
+            }
+            Environment environment = new Environment(env);
+            if (Let.define(bindings, env, environment) == 0) // >= 0?
+            {
+                Node bcar = body.getCar().eval(env);
+                Node bcdr = body.getCdr();
+                while (!bcdr.isNull())
+                {
+                    bcar = body.getCar().eval(env);
+                    bcdr = body.getCdr();
+                }
+                return bcar;
+            }
+            Console.Error.WriteLine("Error: invalid expression");
+            return Nil.getInstance();
+        }
     }
 }
 

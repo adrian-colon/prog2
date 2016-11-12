@@ -27,7 +27,7 @@ namespace Tree
             Node els;
             if (numArgs < 2 || numArgs > 3)
             {
-                Console.Error.WriteLine("Error: wrong number of arguments");
+                Console.Error.WriteLine("Error: invalid expression");
                 return Nil.getInstance();
             }       
             else

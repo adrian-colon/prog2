@@ -25,7 +25,7 @@ namespace Tree
 
             if (numArgs != 2)
             {
-                Console.Error.WriteLine("Error: wrong number of arguments");
+                Console.Error.WriteLine("Error: invalid expression);
                 return Nil.getInstance();
             }
             Node arg1 = exp.getCdr().getCar();
