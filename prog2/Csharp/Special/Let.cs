@@ -50,8 +50,8 @@ namespace Tree
                 Console.Error.WriteLine("Error: invalid expression");
                 return Nil.getInstance();
             }
-            Node bindings = exp.getCdr().getCar(); //bindings car
-            Node body = exp.getCdr().getCdr(); //body cdr
+            Node bindings = exp.getCdr().getCar();
+            Node body = exp.getCdr().getCdr();
             Node cdr = exp.getCdr().getCar();
             Node car;
             int numBindings = 0;
@@ -74,7 +74,7 @@ namespace Tree
                 return Nil.getInstance();
             }
             Environment letEnv = new Environment(env);
-            if (Let.define(bindings, env, letEnv) == 0) // >= 0?
+            if (Let.define(bindings, env, letEnv) == 0)
             {
                 Node bcar = body.getCar().eval(letEnv);
                 Node bcdr = body.getCdr();

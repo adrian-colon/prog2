@@ -46,11 +46,6 @@ namespace Tree
         // DONE :: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
-
-        // TODO :: Implement apply, see top
-        //  program BuiltIn.apply() in a functional
-        //  style by writing a large if-then-else chain that tests the name of
-        //  the function symbol.
         public override Node apply(Node args)
         {
             string name = symbol.getName();
@@ -72,7 +67,7 @@ namespace Tree
                     Node exp = (Node)parser.parseExp();
                     if (!exp.isNull())
                         return exp;
-                    return new StringLit("End of file"); //opt?
+                    return new StringLit("End of file");
                 }
                 else if (name.Equals("newline"))
                 {
@@ -139,7 +134,6 @@ namespace Tree
                     return new StringLit("#{Unspecific}");
                 }
                 if (name.Equals("eval"))
-                    //ret arg1?
                     return arg1.eval((Environment)arg2);
                 if (name.Equals("apply"))
                     return arg1.apply(arg2);
