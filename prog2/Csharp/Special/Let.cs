@@ -18,9 +18,9 @@ namespace Tree
             //no bindings left, exit with 0
             if (bindings.isNull())
                 return 0;
-            Node bind = bindings.getCar();
+            Node binding = bindings.getCar();
             int numArgs = 1;
-            Node expCdr = bind.getCdr();
+            Node expCdr = binding.getCdr();
             while (!expCdr.isNull())
             {
                 numArgs++;
@@ -29,8 +29,8 @@ namespace Tree
             //binding has wrong num args, exit with -1
             if (numArgs != 2)
                 return -1;
-            Node var = bind.getCar();
-            Node val = bind.getCdr().getCar().eval(env);
+            Node var = binding.getCar();
+            Node val = binding.getCdr().getCar().eval(env);
             letEnv.define(var, val);
             return Let.define(bindings.getCdr(), env, letEnv);
         }
@@ -73,14 +73,14 @@ namespace Tree
                 Console.Error.WriteLine("Error: invalid expression");
                 return Nil.getInstance();
             }
-            Environment environment = new Environment(env);
-            if (Let.define(bindings, env, environment) == 0) // >= 0?
+            Environment letEnv = new Environment(env);
+            if (Let.define(bindings, env, letEnv) == 0) // >= 0?
             {
-                Node bcar = body.getCar().eval(env);
+                Node bcar = body.getCar().eval(letEnv);
                 Node bcdr = body.getCdr();
                 while (!bcdr.isNull())
                 {
-                    bcar = bcdr.getCar().eval(env);
+                    bcar = bcdr.getCar().eval(letEnv);
                     bcdr = bcdr.getCdr();
                 }
                 return bcar;
