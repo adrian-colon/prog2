@@ -98,13 +98,13 @@ namespace Tree
                     return BoolLit.getInstance(arg1.isProcedure());
                 if (name.Equals("write"))
                 {
-                    arg1.print(0); // 0 prints new line after. -1?
+                    arg1.print(0);
                     return new StringLit("#{Unspecific}");
                 }
                 if (name.Equals("display"))
                 {
                     StringLit.printQuotes = false;
-                    arg1.print(0); // -1?
+                    arg1.print(0);
                     StringLit.printQuotes = true;
                     return new StringLit("#{Unspecific}");
                 }
