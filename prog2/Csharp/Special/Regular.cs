@@ -13,17 +13,17 @@ namespace Tree
             Printer.printRegular(t, n, p);
         }
 
-        public Node evalCons(Node exp, Environment env)
+        public Node makeCons(Node exp, Environment env)
         {
             if (exp.isNull())
                 return Nil.getInstance();
-            return new Cons(exp.getCar().eval(env), evalCons(exp.getCdr(), env));
+            return new Cons(exp.getCar().eval(env), makeCons(exp.getCdr(), env));
         }
 
         public override Node eval(Node exp, Environment env)
         {
             if (!exp.isNull())
-                return exp.getCar().eval(env).apply(evalCons(exp.getCdr(), env));
+                return exp.getCar().eval(env).apply(makeCons(exp.getCdr(), env));
             Console.Error.WriteLine("Error: invalid expression");
             return Nil.getInstance();
         }

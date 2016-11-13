@@ -32,7 +32,7 @@ namespace Tree
             Node var = binding.getCar();
             Node val = binding.getCdr().getCar().eval(env);
             letEnv.define(var, val);
-            return Let.define(bindings.getCdr(), env, letEnv);
+            return define(bindings.getCdr(), env, letEnv);
         }
 
         public override Node eval(Node exp, Environment env)
@@ -74,7 +74,7 @@ namespace Tree
                 return Nil.getInstance();
             }
             Environment letEnv = new Environment(env);
-            if (Let.define(bindings, env, letEnv) == 0)
+            if (define(bindings, env, letEnv) == 0)
             {
                 Node bcar = body.getCar().eval(letEnv);
                 Node bcdr = body.getCdr();
