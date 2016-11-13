@@ -22,7 +22,7 @@ namespace Tree
         //    if test failed: go to next clause
         //    check alt or normal form
         //        eval expression(s) appropriately
-        private Node evalClauses(Node clauses, Environment env)
+        private Node evalConds(Node clauses, Environment env)
         {
             // if end of clauses and nothing has been returned, return unspecific
             if (clauses.isNull())
@@ -47,30 +47,23 @@ namespace Tree
                 }
                 else
                 {
-                    Node car;
-                    if (exprs.getCar().isPair())
+                    // evaluate each expr in exprs then return the last one
+                    Node car = Nil.getInstance();
+                    while (!exprs.isNull())
                     {
-                        // placeholder assignment to avoid unassigned variable error
-                        // the loop will always run at least once so this value wont matter
-                        car = exprs;
-                        // iterate exprs, evaluate each, then return the last one
-                        while (!exprs.isNull())
+                        expr = exprs.getCar();
+                        car = expr.eval(env);
+                        if (expr.isPair())
                         {
-                            //get an expression out of the list of else expressions
-                            expr = exprs.getCar();
-                            //evaluate the extracted expression
                             Node cdr = expr.getCdr();
                             while (!cdr.isNull())
                             {
                                 car = cdr.getCar().eval(env);
                                 cdr = cdr.getCdr();
                             }
-                            //get rest of expressions
-                            exprs = exprs.getCdr();
                         }
+                        exprs = exprs.getCdr();
                     }
-                    else
-                        car = exprs.getCar().eval(env);
                     return car;
                 }
             }
@@ -80,31 +73,29 @@ namespace Tree
                 return testEval;
             // if test failed go to next clause
             if (testEval == BoolLit.getInstance(false))
-                return evalClauses(clauses.getCdr(), env);
+                return evalConds(clauses.getCdr(), env);
             // if alternate form
             if (exprs.getCar().getName().Equals("=>"))
                 return exprs.getCdr().getCar().eval(env).apply(testEval);
             //normal form: iterate exprs, evaluate each expr, then return last expr
             else
             {
-                Node car;
-                if (exprs.getCar().isPair())
+                Node car = Nil.getInstance();
+                while (!exprs.isNull())
                 {
-                    car = exprs;
-                    while (!exprs.isNull())
+                    expr = exprs.getCar();
+                    car = expr.eval(env);
+                    if (expr.isPair())
                     {
-                        expr = exprs.getCar();
                         Node cdr = expr.getCdr();
                         while (!cdr.isNull())
                         {
                             car = cdr.getCar().eval(env);
                             cdr = cdr.getCdr();
                         }
-                        exprs = exprs.getCdr();
                     }
+                    exprs = exprs.getCdr();
                 }
-                else
-                    car = exprs.getCar().eval(env);
                 return car;
             }
         }
@@ -125,7 +116,7 @@ namespace Tree
             }
             Node cnd = exp.getCdr().getCar();
             Node test = cnd.getCar();
-            return evalClauses(exp.getCdr(), env);
+            return evalConds(exp.getCdr(), env);
         }
     }
 }

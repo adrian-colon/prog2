@@ -36,7 +36,7 @@ namespace Tree
             for (int i = 0; i < n; i++)
                 Console.Write(' ');
             Console.Write("#{Built-in Procedure ");
-            if (symbol != null)
+            if (!symbol.isNull())
                 symbol.print(-Math.Abs(n));
             Console.Write('}');
             if (n >= 0)
@@ -70,9 +70,9 @@ namespace Tree
                 {
                     Parser parser = new Parser(new Scanner(Console.In), new TreeBuilder());
                     Node exp = (Node)parser.parseExp();
-                    if (exp != null)
+                    if (!exp.isNull())
                         return exp;
-                    //return end of file?
+                    return new StringLit("End of file"); //opt?
                 }
                 else if (name.Equals("newline"))
                 {

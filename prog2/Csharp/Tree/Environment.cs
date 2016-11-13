@@ -59,9 +59,9 @@ namespace Tree
             for (int i = 0; i < n; i++)
                 Console.Write(' ');
             Console.WriteLine("#{Environment");
-            if (frame != null)
+            if (!frame.isNull()) // != null
                 frame.print(Math.Abs(n) + 4);
-            if (env != null)
+            if (env != null) // != null
                 env.print(Math.Abs(n) + 4);
             for (int i = 0; i < Math.Abs(n); i++)
                 Console.Write(' ');
@@ -73,7 +73,7 @@ namespace Tree
         private static Node find(Node id, Node alist)
         {
             if (!alist.isPair())
-                return null;	// in Scheme we'd return #f
+                return Nil.getInstance();	// in Scheme we'd return #f
             else
             {
                 Node bind = alist.getCar();
@@ -89,12 +89,12 @@ namespace Tree
         public Node lookup(Node id)
         {
             Node val = find(id, frame);
-            if (val == null && env == null)
+            if (val.isNull() && env == null) // == null
             {
                 Console.Error.WriteLine("undefined variable " + id.getName());
                 return Nil.getInstance();
             }
-            else if (val == null)
+            else if (val.isNull()) // == null
                 // look up the identifier in the enclosing scope
                 return env.lookup(id);
             else
@@ -118,11 +118,11 @@ namespace Tree
         {
             // DONE :: implement this function
             Node value = find(id, frame);
-            if (value == null && env == null)
+            if (value.isNull() && env == null) //== null
             {
                 Console.Error.WriteLine("undefined variable " + id.getName());
             }
-            else if (value == null)
+            else if (value.isNull()) //== null
                 env.assign(id, val);
             else
                 value.setCar(val);

@@ -32,13 +32,13 @@ namespace Tree
 
         public virtual Node eval(Environment env)
         {
-            Console.Error.WriteLine("Error: Invalid Expression");
+            Console.Error.WriteLine("Error: invalid expression");
             return Nil.getInstance();
         }
 
         public virtual Node apply(Node args)
         {
-            Console.Error.WriteLine("Error: Not a Procedure");
+            Console.Error.WriteLine("Error: not a procedure");
             return Nil.getInstance();
         }
 
@@ -67,13 +67,13 @@ namespace Tree
         public virtual Node getCar()
         {
             Console.Error.WriteLine("Error: argument of car is not a pair");
-            return null;
+            return Nil.getInstance();
         }
 
         public virtual Node getCdr()
         {
             Console.Error.WriteLine("Error: argument of cdr is not a pair");
-            return null;
+            return Nil.getInstance();
         }
 
         public virtual void setCar(Node a)
