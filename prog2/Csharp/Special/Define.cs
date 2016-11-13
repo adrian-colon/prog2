@@ -38,7 +38,7 @@ namespace Tree
             {
                 Node val = exp.getCdr().getCdr().getCar();
                 env.define(arg1, val.eval(env));
-                return new StringLit("; no values returned");
+                return new StringLit("; no values returned", false);
             }
             if (arg1.isPair())
             {
@@ -46,11 +46,11 @@ namespace Tree
                 Node fArgs = arg1.getCdr();
                 Node fBody = exp.getCdr().getCdr();
                 bool validArgs = verifyArgs(fArgs);
-                if (fName.isSymbol() && verifyArgs(fArgs))
+                if (fName.isSymbol() && validArgs)
                 {
                     Node node = new Cons(new Ident("lambda"), new Cons(fArgs, fBody));
                     env.define(fName, node.eval(env));
-                    return new StringLit("; no values returned");
+                    return new StringLit("; no values returned", false);
                 }
                 Console.Error.WriteLine("Error: ill-formed definition");
                 return Nil.getInstance();

@@ -113,6 +113,7 @@ public class Scheme4101
         while (root != null) 
         {
             root.eval(env).print(0);
+            StringLit.printQuotes = true;
             Console.Write("> ");
             root = (Node) parser.parseExp();
         }

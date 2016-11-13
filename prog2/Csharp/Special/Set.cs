@@ -31,7 +31,7 @@ namespace Tree
             Node arg1 = exp.getCdr().getCar();
             Node arg2 = exp.getCdr().getCdr().getCar();
             env.assign(arg1, arg2.eval(env));
-            return new StringLit("#{Unspecific}");
+            return new StringLit("#{Unspecific}", false);
         }
 }
 }

@@ -14,6 +14,12 @@ namespace Tree
             stringVal = s;
         }
 
+        public StringLit(string s, bool quotes)
+        {
+            stringVal = s;
+            printQuotes = false;
+        }
+
         public override void print(int n)
         {
             if (printQuotes)

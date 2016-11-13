@@ -14,7 +14,6 @@ namespace Tree
         }
         public override Node eval(Node exp, Environment env)
         {
-            //Could add error checks
             return exp.getCdr().getCar();
         }
     }

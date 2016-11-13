@@ -67,12 +67,12 @@ namespace Tree
                     Node exp = (Node)parser.parseExp();
                     if (!exp.isNull())
                         return exp;
-                    return new StringLit("End of file");
+                    return new StringLit("End of file", false);
                 }
                 else if (name.Equals("newline"))
                 {
                     Console.WriteLine();
-                    return new StringLit("#{Unspecific}");
+                    return new StringLit("#{Unspecific}", false);
                 }
                 else if (name.Equals("interaction-environment"))
                     return Scheme4101.env;
@@ -99,14 +99,14 @@ namespace Tree
                 if (name.Equals("write"))
                 {
                     arg1.print(0);
-                    return new StringLit("#{Unspecific}");
+                    return new StringLit("#{Unspecific}", false);
                 }
                 if (name.Equals("display"))
                 {
                     StringLit.printQuotes = false;
                     arg1.print(0);
                     StringLit.printQuotes = true;
-                    return new StringLit("#{Unspecific}");
+                    return new StringLit("#{Unspecific}", false);
                 }
                 Console.Error.WriteLine("Error: invalid input");
                 return Nil.getInstance();
@@ -126,12 +126,12 @@ namespace Tree
                 if (name.Equals("set-car!"))
                 {
                     arg1.setCar(arg2);
-                    return new StringLit("#{Unspecific}");
+                    return new StringLit("#{Unspecific}", false);
                 }
                 if (name.Equals("set-cdr!"))
                 {
                     arg1.setCdr(arg2);
-                    return new StringLit("#{Unspecific}");
+                    return new StringLit("#{Unspecific}", false);
                 }
                 if (name.Equals("eval"))
                     return arg1.eval((Environment)arg2);

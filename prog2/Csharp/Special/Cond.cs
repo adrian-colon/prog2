@@ -26,7 +26,7 @@ namespace Tree
         {
             // if end of clauses and nothing has been returned, return unspecific
             if (clauses.isNull())
-                return new StringLit("#{Unspecific}");
+                return new StringLit("#{Unspecific}", false);
             Node cnd = clauses.getCar();
             // make sure clause isnt empty
             if (cnd.isNull())
@@ -114,8 +114,6 @@ namespace Tree
                 Console.Error.WriteLine("Error: invalid expression");
                 return Nil.getInstance();
             }
-            Node cnd = exp.getCdr().getCar();
-            Node test = cnd.getCar();
             return evalConds(exp.getCdr(), env);
         }
     }
