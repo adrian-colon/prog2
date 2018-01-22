@@ -1,2 +1,2 @@
 # prog2
-4101
+CSC 4101 at LSU
